@@ -17,4 +17,19 @@ Output: "bab"
   
   符合第1 2类型的问题较多，即对于问题而言有最有子解法，能写出状态转移方程，回归到此问题，对于此题而言，符合回文的字符串子串也一定符合回文字符串，即包含子问题最优解，状态转移方程为dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i+1][j-1] = true)
   
- 
+public class Solution{
+    public String longestPalindrome(String s) {
+        int length = s.length();
+        boolean dp[len][len]; 
+
+        for(int i = 0; i < length; i++) {
+            dp[i][i] = true;
+        }
+
+        for(int substringLen = 2; substringLen < len ; substringLen++) {
+            for(int j = 0; j < length - substringLen; j++) {
+                dp[]
+            }
+        }
+    }
+}
