@@ -17,19 +17,35 @@ Output: "bab"
   
   符合第1 2类型的问题较多，即对于问题而言有最有子解法，能写出状态转移方程，回归到此问题，对于此题而言，符合回文的字符串子串也一定符合回文字符串，即包含子问题最优解，状态转移方程为dp[i][j] = (s.charAt(i) == s.charAt(j) && dp[i+1][j-1] = true)
   
-public class Solution{
-    public String longestPalindrome(String s) {
-        int length = s.length();
-        boolean dp[len][len]; 
-
-        for(int i = 0; i < length; i++) {
+public class Solution {
+    public String longestPalindrome(String s){
+        int n = s.length();
+        boolean dp[][] = new boolean[n][n];
+        int start = 0, substringLen = 1;
+        
+        for(int i = 0; i < n; i++) {
             dp[i][i] = true;
-        }
-
-        for(int substringLen = 2; substringLen < len ; substringLen++) {
-            for(int j = 0; j < length - substringLen; j++) {
-                dp[]
+            
+            //对于长度为2的字符串进行初始化
+            if( i < n-1 && s.charAt(i) == s.charAt(i+1) ){
+                dp[i][i+1] = true;
+                start = i;
+                substringLen = 2;
             }
         }
+        
+        //子字符串长度从3开始计算，如果是长度是2的话会出现start比end大的情况
+        for(int len = 3; len <= n; len++) {
+            for(int substringStart = 0; substringStart <= n - len; substringStart++) {
+                int substringEnd = substringStart + len - 1;
+                if(s.charAt(substringStart) == s.charAt(substringEnd) && dp[substringStart+1][substringEnd-1] ){
+                    dp[substringStart][substringEnd] = true;
+                    start = substringStart;
+                    substringLen = len;  
+                }
+            }
+        }
+        
+        return s.substring(start, start + substringLen);
     }
 }
